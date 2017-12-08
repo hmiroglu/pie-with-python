@@ -35,6 +35,9 @@ pr.set_size('xx-large') #or you can choose xx-small etc.
 plt.setp(autotexts, fontproperties=pr)
 plt.setp(texts, fontproperties=pr)
 
+for autotext in autotexts:
+    autotext.set_color('white') 
+
 plt.title('TITLE',bbox={'facecolor':'1.8', 'pad':20})
 # plt.savefig('romanya_rent.png', dpi=100) #you can downloand png
 plt.show() 
