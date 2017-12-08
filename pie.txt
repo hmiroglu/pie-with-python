@@ -1,0 +1,40 @@
+import pandas as pd
+from sqlalchemy import create_engine
+import psycopg2
+import matplotlib.pyplot as plt
+from matplotlib import font_manager as fm
+import seaborn as sns
+
+#your data
+try:
+    conn=psycopg2.connect("dbname='xx' user='xx' host='xx' password='xx'")
+except:
+    print('I am unable to connect to the DB')
+
+cursor = conn.cursor()
+query1 =  """
+write your query or upload your data
+
+"""
+    
+cursor = conn.cursor()
+
+table1 = pd.read_sql(query1, conn)
+table1
+#my data includes rental apartment listings for turkey
+
+df_rent =table1.groupby(['Name1','Name2']).count()
+label = df_rent.T.columns #if you want, you make transpose your data
+fig = plt.figure(1,figsize=(15,11)) 
+
+patches, texts, autotexts= plt.pie(df_rent,explode=None,shadow=True,autopct='%2.0f%%',
+                                   startangle=10,labels=label,labeldistance=1.05)
+plt.axis('equal')
+pr= fm.FontProperties()
+pr.set_size('xx-large') #or you can choose xx-small etc.
+plt.setp(autotexts, fontproperties=pr)
+plt.setp(texts, fontproperties=pr)
+
+plt.title('TITLE',bbox={'facecolor':'1.8', 'pad':20})
+# plt.savefig('romanya_rent.png', dpi=100) #you can downloand png
+plt.show() 
